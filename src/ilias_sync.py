@@ -178,7 +178,7 @@ def main() -> None:
 
     if not args.synchronizers or "mint_hm1" in args.synchronizers:
         pferd.ilias_kit(
-            target="HM1/Mint-Kolleg",
+            target="Mint-Kolleg HM1",
             course_id="1286773",
             dir_filter=filter_ws_2020_mint_hm1,
             transform=tf_ws_2020_mint_hm1,

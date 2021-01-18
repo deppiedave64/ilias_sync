@@ -41,14 +41,11 @@ tf_ws_2020_la1 = attempt(
 )
 
 tf_ws_2020_hm1 = attempt(
-    re_move(r"Tutorien/Tutorium_03/Übungsblattabgabe/Übungsblatt_([0-9]+)/.+\.pdf", "Blätter/HM1_ÜB {1} Abgabe korrigiert.pdf"),
-    do(
-        move_dir("Vorlesungsmaterial/", "../"),
-        optionally(rename("Skript Höhere Mathematik 1.pdf", "HM1_Skript.pdf")),
-    ),
+    re_move(r"Tutorien/Tutorium_03/Übungsblattabgabe/Übungsblatt_([0-9]+)/.*\.pdf", "Blätter/HM1_ÜB {1} Abgabe korrigiert.pdf"),
+    move("Vorlesungsmaterial/Skript Höhere Mathematik 1.pdf", "HM1_Skript.pdf"),
     do(
         move_dir("Übungen/", "Übung/"),
-        optionally(re_rename(r"Übung_([0-9]{2}).pdf", "HM1_Übung {1}.pdf")),
+        optionally(re_rename(r"Übung_([0-9]{2})\.pdf", "HM1_Übung {1}.pdf")),
     ),
     do(
         optionally(move("Übungsblätter/Lösungsvorschläge/Lösungsvorschlag_Tutoriumsblatt.pdf",

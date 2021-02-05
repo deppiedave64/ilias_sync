@@ -36,7 +36,7 @@ tf_ws_2020_la1 = attempt(
         optionally(re_rename(r"Lösung zu Blatt ([0-9]+)\.pdf", "ÜB {1} Lösung.pdf")),
         re_rename(r"(.*)", "LA1_{1}"),
     ),
-    re_move(r"Tutorien/Tutorium 21: Muhammed Öz/Übungen/.*([0-9]+).*/.*\.pdf", "Blätter/LA1_ÜB {1} Abgabe korrigiert.pdf"),
+    re_move(r"Tutorien/Tutorium 21: Muhammed Öz/Übungen/\D*(\d+)\D*/.*\.pdf", "Blätter/LA1_ÜB {1} Abgabe korrigiert.pdf"),
     keep,
 )
 

@@ -58,11 +58,6 @@ tf_ws_2020_hm1 = attempt(
     keep,
 )
 
-tf_ws_2020_mint_hm1 = do(
-    glob("*.pdf"),
-    keep,
-)
-
 tf_ws_2020_proggen = attempt(
     keep,
 )
@@ -82,6 +77,14 @@ tf_ws_2020_gbi = attempt(
         re_move(r"Aufgabenblätter/Aufgabenblatt ([0-9]+)/loesungen.pdf", "Blätter/GBI_ÜB {1} Lösung.pdf"),
         re_move(r"Aufgabenblätter/Aufgabenblatt ([0-9]+)/.*\.pdf", "Blätter/GBI_ÜB {1} Abgabe korrigiert.pdf"),
     ),
+    keep,
+)
+
+tf_ss_2021_hm2 = attempt(
+    keep,
+)
+
+tf_ss_2021_swt1 = attempt(
     keep,
 )
 
@@ -128,10 +131,6 @@ def filter_ws_2020_hm1(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 
-def filter_ws_2020_mint_hm1(path: PurePath, _type: IliasElementType) -> bool:
-    return True
-
-
 def filter_ws_2020_proggen(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Tutorien")(path):
         return False
@@ -146,6 +145,18 @@ def filter_ws_2020_gbi(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 
+def filter_ss_2021_hm2(path: PurePath, _type: IliasElementType) -> bool:
+    if glob("Tutorien")(path):
+        return False
+    return True
+
+
+def filter_ss_2021_swt1(path: PurePath, _type: IliasElementType) -> bool:
+    if glob("Tutorien")(path):
+        return False
+    return True
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--test-run", action="store_true")
@@ -155,7 +166,7 @@ def main() -> None:
     pferd = Pferd(Path(OUTPUT_PATH), test_run=args.test_run)
     pferd.enable_logging()
 
-    if not args.synchronizers or "la1" in args.synchronizers:
+    if "la1" in args.synchronizers:
         pferd.ilias_kit(
             target="LA1",
             course_id="1258056",
@@ -164,7 +175,7 @@ def main() -> None:
             cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
         )
 
-    if not args.synchronizers or "hm1" in args.synchronizers:
+    if "hm1" in args.synchronizers:
         pferd.ilias_kit(
             target="HM1",
             course_id="1253943",
@@ -173,16 +184,7 @@ def main() -> None:
             cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
         )
 
-    if not args.synchronizers or "mint_hm1" in args.synchronizers:
-        pferd.ilias_kit(
-            target="Mint-Kolleg HM1",
-            course_id="1286773",
-            dir_filter=filter_ws_2020_mint_hm1,
-            transform=tf_ws_2020_mint_hm1,
-            cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
-        )
-
-    if not args.synchronizers or "proggen" in args.synchronizers:
+    if "proggen" in args.synchronizers:
         pferd.ilias_kit(
             target="Proggen",
             course_id="1255116",
@@ -191,12 +193,30 @@ def main() -> None:
             cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
         )
 
-    if not args.synchronizers or "gbi" in args.synchronizers:
+    if "gbi" in args.synchronizers:
         pferd.ilias_kit(
             target="GBI",
             course_id="1281984",
             dir_filter=filter_ws_2020_gbi,
             transform=tf_ws_2020_gbi,
+            cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
+        )
+
+    if not args.synchronizers or "hm2" in args.synchronizers:
+        pferd.ilias_kit(
+            target="HM2",
+            course_id="1460343",
+            dir_filter=filter_ss_2021_hm2,
+            transform=tf_ss_2021_hm2,
+            cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
+        )
+
+    if not args.synchronizers or "swt1" in args.synchronizers:
+        pferd.ilias_kit(
+            target="SWT1",
+            course_id="1468007",
+            dir_filter=filter_ss_2021_swt1,
+            transform=tf_ss_2021_swt1,
             cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
         )
 

@@ -88,6 +88,14 @@ tf_ss_2021_swt1 = attempt(
     keep,
 )
 
+tf_ss_2021_algo1 = attempt(
+    keep,
+)
+
+tf_ss_2021_dt = attempt(
+    keep,
+)
+
 
 def filter_ws_2020_la1(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Tutorien")(path):
@@ -157,6 +165,17 @@ def filter_ss_2021_swt1(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 
+def filter_ss_2021_algo1(path: PurePath, _type: IliasElementType) -> bool:
+    if glob("Tutorien")(path):
+        return False
+    if glob("Vorlesungsmaterial/Videos - Initiativen"):
+        return False
+    return True
+
+def filter_ss_2021_dt(path: PurePath, _type: IliasElementType) -> bool:
+    return True
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--test-run", action="store_true")
@@ -218,6 +237,24 @@ def main() -> None:
             dir_filter=filter_ss_2021_swt1,
             transform=tf_ss_2021_swt1,
             cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
+        )
+    
+    if not args.synchronizers or "algo1" in args.synchronizers:
+        pferd.ilias_kit(
+            target="Algo1",
+            course_id="1470307",
+            dir_filter=filter_ss_2021_algo1,
+            transform=tf_ss_2021_algo1,
+            cookies=f"{OUTPUT_PATH}.ilias_cookies.txt"
+        )
+
+    if not args.synchronizers or "dt" in args.synchronizers:
+        pferd.ilias_kit(
+            target="DT",
+            course_id="1479423",
+            dir_filter=filter_ss_2021_dt,
+            transform=tf_ss_2021_dt,
+            cookies=f"{OUTPUT_PATH}.ilias_cookies.txt"
         )
 
     pferd.print_summary()

@@ -96,6 +96,10 @@ tf_ss_2021_dt = attempt(
     keep,
 )
 
+tf_ss_2021_jap2 = attempt(
+    keep,
+)
+
 
 def filter_ws_2020_la1(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Tutorien")(path):
@@ -173,6 +177,9 @@ def filter_ss_2021_algo1(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 def filter_ss_2021_dt(path: PurePath, _type: IliasElementType) -> bool:
+    return True
+
+def filter_ss_2021_jap2(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 
@@ -254,6 +261,15 @@ def main() -> None:
             course_id="1479423",
             dir_filter=filter_ss_2021_dt,
             transform=tf_ss_2021_dt,
+            cookies=f"{OUTPUT_PATH}.ilias_cookies.txt"
+        )
+
+    if not args.synchronizers or "jap2" in args.synchronizers:
+        pferd.ilias_kit(
+            target="Japanisch",
+            course_id="1447952",
+            dir_filter=filter_ss_2021_jap2,
+            transform=tf_ss_2021_jap2,
             cookies=f"{OUTPUT_PATH}.ilias_cookies.txt"
         )
 

@@ -172,7 +172,11 @@ def filter_ss_2021_swt1(path: PurePath, _type: IliasElementType) -> bool:
 def filter_ss_2021_algo1(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Tutorien")(path):
         return False
-    if glob("Vorlesungsmaterial/Videos - Initiativen"):
+    if glob("Vorlesungsmaterial")(path):
+        return True
+    if glob("Vorlesungsmaterial/Videos - Initiativen")(path):
+        return False
+    if glob("Vorlesungsmaterial/Aufzeichnungen der Vorlesung")(path):
         return False
     return True
 

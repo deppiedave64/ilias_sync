@@ -160,6 +160,8 @@ def filter_ws_2020_gbi(path: PurePath, _type: IliasElementType) -> bool:
 def filter_ss_2021_hm2(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Tutorien")(path):
         return False
+    if glob("Vorlesung")(path):
+        return False
     return True
 
 

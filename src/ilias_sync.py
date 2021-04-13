@@ -84,6 +84,10 @@ tf_ss_2021_hm2 = attempt(
     keep,
 )
 
+tf_ss_2021_la2 = attempt(
+    keep,
+)
+
 tf_ss_2021_swt1 = attempt(
     keep,
 )
@@ -165,6 +169,10 @@ def filter_ss_2021_hm2(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 
+def filter_ss_2021_la2(path: PurePath, _type: IliasElementType) -> bool:
+    return True
+
+
 def filter_ss_2021_swt1(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Tutorien")(path):
         return False
@@ -240,6 +248,15 @@ def main() -> None:
             course_id="1460343",
             dir_filter=filter_ss_2021_hm2,
             transform=tf_ss_2021_hm2,
+            cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
+        )
+    
+    if not args.synchronizers or "la2" in args.synchronizers:
+        pferd.ilias_kit(
+            target="LA2",
+            course_id="1471707",
+            dir_filter=filter_ss_2021_la2,
+            transform=tf_ss_2021_la2,
             cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
         )
 

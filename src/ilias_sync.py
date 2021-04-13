@@ -191,6 +191,8 @@ def filter_ss_2021_algo1(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 def filter_ss_2021_dt(path: PurePath, _type: IliasElementType) -> bool:
+    if glob("Werbung für Hochschulgruppen")(path):
+        return False
     return True
 
 def filter_ss_2021_jap2(path: PurePath, _type: IliasElementType) -> bool:

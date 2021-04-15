@@ -104,6 +104,10 @@ tf_ss_2021_jap2 = attempt(
     keep,
 )
 
+tf_ss_2021_icpc = attempt(
+    keep,
+)
+
 
 def filter_ws_2020_la1(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Tutorien")(path):
@@ -200,6 +204,9 @@ def filter_ss_2021_dt(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 def filter_ss_2021_jap2(path: PurePath, _type: IliasElementType) -> bool:
+    return True
+
+def filter_ss_2021_icpc(path: PurePath, _type: IliasElementType) -> bool:
     return True
 
 
@@ -300,6 +307,15 @@ def main() -> None:
             dir_filter=filter_ss_2021_jap2,
             transform=tf_ss_2021_jap2,
             cookies=f"{OUTPUT_PATH}.ilias_cookies.txt"
+        )
+    
+    if not args.synchronizers or "icpc" in args.synchronizers:
+        pferd.ilias_kit(
+            target="ICPC",
+            course_id="1430957",
+            dir_filter=filter_ss_2021_icpc,
+            transform=tf_ss_2021_icpc,
+            cookies=f"{OUTPUT_PATH}.ilias_cookies.txt",
         )
 
     pferd.print_summary()

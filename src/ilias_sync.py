@@ -170,6 +170,8 @@ def filter_ss_2021_hm2(path: PurePath, _type: IliasElementType) -> bool:
 
 
 def filter_ss_2021_la2(path: PurePath, _type: IliasElementType) -> bool:
+    if glob("Vorlesungsmaterial/Videos")(path):
+        return False
     return True
 
 
@@ -192,6 +194,8 @@ def filter_ss_2021_algo1(path: PurePath, _type: IliasElementType) -> bool:
 
 def filter_ss_2021_dt(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Werbung für Hochschulgruppen")(path):
+        return False
+    if glob("Vorlesungsmaterial/Vorlesungsaufzeichnungen")(path):
         return False
     return True
 

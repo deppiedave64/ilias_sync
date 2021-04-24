@@ -89,7 +89,10 @@ tf_ss_2021_la2 = attempt(
 )
 
 tf_ss_2021_swt1 = attempt(
-    keep,
+    glob("*.pdf"),
+    glob("*.zip"),
+    glob("*.jpg"),
+    glob("*.java"),
 )
 
 tf_ss_2021_algo1 = attempt(
@@ -181,6 +184,10 @@ def filter_ss_2021_la2(path: PurePath, _type: IliasElementType) -> bool:
 
 def filter_ss_2021_swt1(path: PurePath, _type: IliasElementType) -> bool:
     if glob("Tutorien")(path):
+        return False
+    if glob("HaDiKo")(path):
+        return False
+    if glob("linkit")(path):
         return False
     return True
 

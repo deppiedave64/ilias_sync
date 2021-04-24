@@ -81,7 +81,7 @@ tf_ws_2020_gbi = attempt(
 )
 
 tf_ss_2021_hm2 = attempt(
-    keep,
+    glob("*.pdf"),
 )
 
 tf_ss_2021_la2 = attempt(

@@ -92,6 +92,7 @@ tf_ss_2021_swt1 = attempt(
     glob("*.pdf"),
     glob("*.zip"),
     glob("*.jpg"),
+    glob("*.png"),
     glob("*.java"),
 )
 

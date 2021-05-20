@@ -101,7 +101,7 @@ tf_ss_2021_algo1 = attempt(
 )
 
 tf_ss_2021_dt = attempt(
-    keep,
+    glob("*.pdf"),
 )
 
 tf_ss_2021_jap2 = attempt(

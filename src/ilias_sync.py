@@ -97,7 +97,8 @@ tf_ss_2021_swt1 = attempt(
 )
 
 tf_ss_2021_algo1 = attempt(
-    keep,
+    glob("*.pdf"),
+    glob("*.pptx"),
 )
 
 tf_ss_2021_dt = attempt(
